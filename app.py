@@ -105,6 +105,9 @@ st.markdown(
         [data-testid="stHeader"] {
             background-color: transparent !important;
         }
+        .stMarkdown [data-testid="stMarkdownContainer"] {
+            font-family: 'Georgia', 'Times New Roman', serif !important;
+        }
         .top-text-wrapper {margin-top: -60px; margin-bottom: 4px; padding-bottom: 0;}
        
         .top-text-wrapper h1 {
@@ -139,6 +142,7 @@ st.markdown(
             box-sizing: border-box !important;
         }
         [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p {
+            font-family: 'Georgia', 'Times New Roman', serif !important;
             font-size: 1.2rem !important;
             line-height: 1.5 !important;
         }
@@ -346,5 +350,5 @@ with st.expander("Party Library - Learn about the parties"):
 
 with st.expander("About the Project"):
     st.markdown("""
-    This project was created solely as an experimental endeavour. The game challenges its players to guess the party alligiance of Turkish members of parliament based on their physical aspects, such as facial hair styles and dress codes. By matching the portraits of these MPs to their respective parties, players can gain a deeper understanding of how political polarisation impacts physical outlook and preferences of fashion.
+    This project was created solely as an experimental endeavour. The game challenges its players to guess the party allegiance of Turkish members of parliament based on their physical aspects, such as facial hair styles and dress codes. By matching the portraits of these MPs to their respective parties, players can gain a deeper understanding of how political polarisation impacts physical outlook and preferences of fashion.
     """)
