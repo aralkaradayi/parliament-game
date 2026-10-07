@@ -144,13 +144,10 @@ st.markdown(
             padding: 1.25rem 1.5rem !important;
             box-sizing: border-box !important;
         }
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] strong,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h1,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h2,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h3,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h4,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h5,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h6 {
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] :is(strong, h1, h2, h3, h4, h5, h6),
+        [data-testid="stAlert"]:is(:hover, :focus, :focus-within, :active) [data-testid="stMarkdownContainer"] :is(strong, h1, h2, h3, h4, h5, h6),
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] :is(strong, h1, h2, h3, h4, h5, h6):is(:hover, :focus, :active) {
+            font-family: 'Georgia', 'Times New Roman', serif !important;
             color: #2C3E50 !important;
         }
         [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p {
