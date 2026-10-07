@@ -98,6 +98,13 @@ if "recent_guesses" not in st.session_state: st.session_state.recent_guesses = [
 st.markdown(
     """
     <style>
+        .stApp,
+        [data-testid="stAppViewContainer"] {
+            background-color: #f5f0e6 !important;
+        }
+        [data-testid="stHeader"] {
+            background-color: transparent !important;
+        }
         .top-text-wrapper {margin-top: -60px; margin-bottom: 4px; padding-bottom: 0;}
        
         .top-text-wrapper h1 {
@@ -125,6 +132,15 @@ st.markdown(
         [data-testid="stHorizontalBlock"] [data-testid="stButton"] button,
         [data-testid="stHorizontalBlock"] [data-testid="stButton"] button p {
             font-size: 21px !important;
+        }
+        [data-testid="stAlert"] {
+            min-height: 84px !important;
+            padding: 1.25rem 1.5rem !important;
+            box-sizing: border-box !important;
+        }
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p {
+            font-size: 1.2rem !important;
+            line-height: 1.5 !important;
         }
         .title {
             font-family: 'Cinzel', 'Times New Roman', serif;
