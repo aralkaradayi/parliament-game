@@ -144,9 +144,14 @@ st.markdown(
             padding: 1.25rem 1.5rem !important;
             box-sizing: border-box !important;
         }
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] :is(strong, h1, h2, h3, h4, h5, h6),
-        [data-testid="stAlert"]:is(:hover, :focus, :focus-within, :active) [data-testid="stMarkdownContainer"] :is(strong, h1, h2, h3, h4, h5, h6),
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] :is(strong, h1, h2, h3, h4, h5, h6):is(:hover, :focus, :active) {
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p,
+        [data-testid="stAlert"]:is(:hover, :focus, :focus-within, :active) [data-testid="stMarkdownContainer"] p,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"]:is(:hover, :focus, :focus-within, :active) p,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p:is(:hover, :focus, :focus-within, :active),
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p *,
+        [data-testid="stAlert"]:is(:hover, :focus, :focus-within, :active) [data-testid="stMarkdownContainer"] p *,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"]:is(:hover, :focus, :focus-within, :active) p *,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p *:is(:hover, :focus, :focus-within, :active) {
             font-family: 'Georgia', 'Times New Roman', serif !important;
             color: #2C3E50 !important;
         }
