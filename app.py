@@ -168,6 +168,9 @@ st.markdown(
         summary:is(:hover, :focus, :focus-within, :active) [data-testid="stMarkdownContainer"] p {
             font-family: Georgia, "Times New Roman", serif !important;
         }
+        summary [data-testid="stMarkdownContainer"] p {
+            font-size: 21px !important;
+        }
         .title {
             font-family: 'Cinzel', 'Times New Roman', serif;
             text-transform: uppercase;
