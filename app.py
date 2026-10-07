@@ -131,15 +131,27 @@ st.markdown(
             padding: 12px 10px !important;
             line-height: 1.2 !important;
             box-sizing: border-box !important;
+            font-family: 'Georgia', 'Times New Roman', serif !important;
         }
         [data-testid="stHorizontalBlock"] [data-testid="stButton"] button,
-        [data-testid="stHorizontalBlock"] [data-testid="stButton"] button p {
+        [data-testid="stHorizontalBlock"] [data-testid="stButton"] button p,
+        [data-testid="stHorizontalBlock"] [data-testid="stButton"] button span {
+            font-family: 'Georgia', 'Times New Roman', serif !important;
             font-size: 21px !important;
         }
         [data-testid="stAlert"] {
             min-height: 84px !important;
             padding: 1.25rem 1.5rem !important;
             box-sizing: border-box !important;
+        }
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] strong,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h1,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h2,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h3,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h4,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h5,
+        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] h6 {
+            color: #2C3E50 !important;
         }
         [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p {
             font-family: 'Georgia', 'Times New Roman', serif !important;
