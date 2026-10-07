@@ -9,7 +9,9 @@ from PIL import Image
 # 1. DOSYA YOLLARI VE KESİNLİKLE İLK ÇALIŞMASI GEREKEN AYARLAR
 # =========================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-icon_path = os.path.join(BASE_DIR, "assets", "demokratiksolparti.png")
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+DATASET_PATH = os.path.join(BASE_DIR, "mps.csv")
+icon_path = os.path.join(ASSETS_DIR, "demokratiksolparti.png")
 
 # İkon dosyasını güvenli bir şekilde kontrol et ve yükle
 if os.path.exists(icon_path):
@@ -28,26 +30,46 @@ st.set_page_config(
 )
 
 # 2. Define the Dataset (Load portrait metadata from mps.csv and normalize party names)
-if "dataset" not in st.session_state:
-    party_aliases = {
-        "FP": "Fazilet",
-        "DYP": "True Path",
-        "MHP": "MHP",
-        "DSP": "DSP",
-        "ANAP": "ANAP"
+
+def normalize_party_name(party_name):
+    if party_name is None:
+        return ""
+
+    normalized = party_name.strip()
+    if not normalized:
+        return ""
+
+    alias_map = {
+        "fp": "Fazilet",
+        "fazilet": "Fazilet",
+        "fazilet partisi": "Fazilet",
+        "dyp": "True Path",
+        "true path": "True Path",
+        "true path party": "True Path",
+        "doğru yol": "True Path",
+        "doğru yol partisi": "True Path",
+        "mhp": "MHP",
+        "dsp": "DSP",
+        "anap": "ANAP",
     }
+    return alias_map.get(normalized.lower(), normalized)
+
+
+if "dataset" not in st.session_state:
     dataset = []
-    csv_path = "mps.csv"
-    if os.path.exists(csv_path):
-        with open(csv_path, newline="", encoding="utf-8") as csvfile:
+    if os.path.exists(DATASET_PATH):
+        with open(DATASET_PATH, newline="", encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row.get("name", "").strip()
                 party = row.get("party", "").strip()
                 img = row.get("img", "").strip()
                 if name and party and img:
-                    normalized_party = party_aliases.get(party, party)
-                    dataset.append({"name": name, "party": normalized_party, "img": img})
+                    dataset.append({
+                        "name": name,
+                        "party": normalize_party_name(party),
+                        "img": img,
+                    })
 
     if not dataset:
         dataset = [
@@ -133,11 +155,12 @@ if st.session_state.trials < 20 and st.session_state.index < len(st.session_stat
     st.markdown(f'<div class="counter-text"> {st.session_state.trials + 1} / 20</div>', unsafe_allow_html=True)
 
     # Render portrait image centered
-    img_path = os.path.join("assets", current_mp["img"])
+    img_path = os.path.join(ASSETS_DIR, current_mp["img"])
     if os.path.exists(img_path):
         left_space, middle_col, right_space = st.columns([1, 2, 1])
         with middle_col:
-            image_bytes = open(img_path, "rb").read()
+            with open(img_path, "rb") as image_file:
+                image_bytes = image_file.read()
             encoded_image = base64.b64encode(image_bytes).decode()
             mime_type = "image/png" if img_path.lower().endswith(".png") else "image/jpeg"
             st.markdown(
@@ -150,7 +173,7 @@ if st.session_state.trials < 20 and st.session_state.index < len(st.session_stat
                 unsafe_allow_html=True,
             )
     else:
-        st.error(f"Image asset missing in your folder: assets/{current_mp['img']}")
+        st.error(f"Image asset missing in your folder: {os.path.relpath(img_path, BASE_DIR)}")
         st.info("Make sure your images are saved in an 'assets' folder and named exactly like the dataset!")
 
     st.markdown("<div class='button-spacer'></div>", unsafe_allow_html=True)
@@ -219,7 +242,7 @@ if st.session_state.trials < 20 and st.session_state.index < len(st.session_stat
         for g in st.session_state.recent_guesses:
             icon = "✅" if g.get("correct") else "❌"
             col_img, col_text, col_actual = st.columns([0.15, 0.6, 0.25])
-            img_file = os.path.join("assets", g.get("img")) if g.get("img") else None
+            img_file = os.path.join(ASSETS_DIR, g.get("img")) if g.get("img") else None
             if img_file and os.path.exists(img_file):
                 try:
                     col_img.image(Image.open(img_file), width=48)
@@ -296,7 +319,6 @@ with st.expander("Party Library - Learn about the parties"):
 
 with st.expander("About the Project"):
     st.markdown("""
-    #### Turkish Political Parties in the new game
-    This project was created solely as an experimental endeavour. The game challenges its players to guess the party alligiance of Turkish members of parliament based on their physical aspects, such as facial hair styles and dress codes. The sample was drawn from the Turkish MPs of 21st Partliament during the 1990s to minimise player familiarity with politicians. By matching the portraits of these MPs to their respective parties, players can gain a deeper understanding of how political polarisation impacts physical outlook and preferences of fashion.
+    This project was created solely as an experimental endeavour. The game challenges its players to guess the party alligiance of Turkish members of parliament based on their physical aspects, such as facial hair styles and dress codes. By matching the portraits of these MPs to their respective parties, players can gain a deeper understanding of how political polarisation impacts physical outlook and preferences of fashion.
     """)
 
