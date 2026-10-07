@@ -115,11 +115,13 @@ st.markdown(
         }
        
         .button-spacer {margin-top: 24px;}
-        .stHorizontalBlock [data-testid="stButton"] > button {
-            min-height: 3.5rem;
-            padding: 0.75rem 0.4rem;
-            font-size: 1rem;
-            box-sizing: border-box;
+        [data-testid="stHorizontalBlock"] [data-testid="stButton"] button {
+            height: 64px !important;
+            min-height: 64px !important;
+            padding: 12px 10px !important;
+            font-size: 1.05rem !important;
+            line-height: 1.2 !important;
+            box-sizing: border-box !important;
         }
         .title {
             font-family: 'Cinzel', 'Times New Roman', serif;
